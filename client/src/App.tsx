@@ -1,26 +1,48 @@
-import * as React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/* Import statements */
+import * as React from "react";
+import { Link, Route, Switch } from "react-router-dom";
+import About from "./about/About";
+import { Products } from "./products/Products";
+import PrivateRoute from "./admin/PrivateRoute";
+import Admin from "./admin/Admin";
+import Login from "./admin/Login";
 
-function App() {
+/* Home component */
+const Home = () => (
+  <div>
+    <h2>Home</h2>
+  </div>
+);
+
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <nav className="navbar navbar-light">
+        <ul className="nav navbar-nav">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/products">Products</Link>
+          </li>
+          <li>
+            <Link to="/admin">Admin area</Link>
+          </li>
+        </ul>
+      </nav>
+      /* Route components are rendered if the path prop matches the current URL */
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/products" component={Products}/>
+        <Route path="/about" component={About}/>
+        <Route path="/login" component={Login} />
+        <PrivateRoute path="/admin" component={Admin} />
+        <Route path="/:id" render = {()=> (<p> I want this text to show up for all routes other than '/', '/products' and '/category' </p>)}/>
+      </Switch>
     </div>
   );
 }
-
-export default App;
