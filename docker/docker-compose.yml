@@ -1,0 +1,21 @@
+version: '3.6'
+services:
+  client:
+    build:
+      context: .
+      dockerfile: ./client/DockerFile
+    working_dir: /usr/src/react-stack/client
+    command:
+      - bash
+      - -c
+      - | 
+        npm install \
+        && npm run dev
+    ports:
+      - 9000:9000
+    networks:
+      - docker-net
+    volumes:
+      - ../:/usr/src/app/react-stack
+networks:
+  docker-net:

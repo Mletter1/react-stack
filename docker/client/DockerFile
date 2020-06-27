@@ -1,0 +1,10 @@
+FROM node
+
+WORKDIR /usr/src
+# RUN git config --global http.sslVerify false
+RUN git clone --depth 1 https://github.com/Mletter1/react-stack.git
+WORKDIR /usr/src/react-stack
+
+RUN npm config set registry http://registry.npmjs.org/
+RUN npm install
+CMD ls
